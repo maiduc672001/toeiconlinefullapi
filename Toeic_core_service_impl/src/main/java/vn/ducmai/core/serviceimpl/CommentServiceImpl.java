@@ -1,4 +1,6 @@
 package vn.ducmai.core.serviceimpl;
 
-public class CommentServiceImpl {
+import vn.ducmai.core.service.CommentService;
+
+public class CommentServiceImpl implements CommentService {
 }

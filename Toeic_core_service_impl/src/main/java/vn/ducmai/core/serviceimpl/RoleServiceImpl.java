@@ -1,4 +1,6 @@
 package vn.ducmai.core.serviceimpl;
 
-public class RoleServiceImpl {
+import vn.ducmai.core.service.RoleService;
+
+public class RoleServiceImpl implements RoleService {
 }

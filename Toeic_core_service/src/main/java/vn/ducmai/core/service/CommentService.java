@@ -1,4 +1,4 @@
 package vn.ducmai.core.service;
 
-public interface CommentService {
+public interface CommentService{
 }
