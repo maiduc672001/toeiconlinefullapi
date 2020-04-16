@@ -2,9 +2,9 @@
 <suite name="TestAll">
     <test name="case1">
         <classes>
-            <class name="vn.myclass.core.test.RoleTest"></class>
-            <class name="vn.myclass.core.test.LoginTest"></class>
-            <class name="vn.myclass.core.test.ListenGuideLineTest"></class>
+            <class name="vn.ducmai.core.test.RoleTest"></class>
+            <class name="vn.ducmai.core.test.LoginTest"></class>
+            <class name="vn.ducmai.core.test.ListenGuidelineTest"></class>
         </classes>
     </test>
 </suite>

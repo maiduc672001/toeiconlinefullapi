@@ -28,7 +28,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         Transaction transaction = session.beginTransaction();
         List<T> ts = null;
         try {
-            StringBuilder sql = new StringBuilder("FROM ").append(this.persistenceClass);
+            StringBuilder sql = new StringBuilder("FROM ").append(this.getPersistenceClassName());
             Query query = session.createQuery(sql.toString());
             ts = query.list();
             transaction.commit();
@@ -122,7 +122,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         Transaction transaction = session.beginTransaction();
         try {
             StringBuilder sql = new StringBuilder("FROM ");
-            sql.append(this.persistenceClass).append(" model WHERE model." + property + "= :value");
+            sql.append(this.getPersistenceClassName()).append(" model WHERE model." + property + "= :value");
             Query query = session.createQuery(sql.toString());
             query.setParameter("value", value);
             object = (T) query.uniqueResult();
@@ -155,7 +155,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             sql1.append(this.getPersistenceClassName()).append(" WHERE 1=1 ");
             if (mapProperties.size() > 0) {
                 for (int j = 0; j < params.length; j++) {
-                    sql1.append(" AND " + params[j] + "= :" + params[j]);
+                    sql1.append(" AND " +"LOWER (" +params[j] + ") LIKE :" + params[j]);
                 }
             }
             if (sortDirection != null && sortExpression != null) {
@@ -165,7 +165,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             Query query1 = session.createQuery(sql1.toString());
             if (mapProperties.size() > 0) {
                 for (int j = 0; j < params.length; j++) {
-                    query1.setParameter(params[j], values[j]);
+                    query1.setParameter(params[j],"%"+ values[j]+"%");
                 }
             }
             if(first!=null&&first>=0){
@@ -178,13 +178,13 @@ query1.setFirstResult(first);
             StringBuilder sql2=new StringBuilder("SELECT COUNT(*) FROM ").append(this.getPersistenceClassName()).append(" WHERE 1=1 ");
             if(mapProperties.size()>0){
                 for(int j=0;j<params.length;j++){
-                    sql2.append(" AND "+params[j]+"= :"+params[j]);
+                    sql2.append(" AND "+"LOWER ("+params[j]+") LIKE :"+params[j]);
                 }
             }
             Query query2=session.createQuery(sql2.toString());
             if (mapProperties.size() > 0) {
                 for (int j = 0; j < params.length; j++) {
-                    query2.setParameter(params[j], values[j]);
+                    query2.setParameter(params[j],"%"+ values[j]+"%");
                 }
             }
             totalItems= query2.list().get(0);

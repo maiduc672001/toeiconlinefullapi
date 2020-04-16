@@ -13,4 +13,13 @@
     <decorator name="login" page="login.jsp">
         <pattern>/login*</pattern>
     </decorator>
+    <decorator name="product" page="product.jsp">
+        <pattern>/exercise*</pattern>
+    </decorator>
+    <decorator name="product" page="product.jsp">
+        <pattern>/bai-tap*</pattern>
+    </decorator>
+    <decorator name="product" page="product.jsp">
+        <pattern>/examination*</pattern>
+    </decorator>
 </decorators>

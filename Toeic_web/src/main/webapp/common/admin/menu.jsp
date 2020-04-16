@@ -4,6 +4,12 @@
 <c:url var="listListenGuideline" value="/admin-listenguideline-list.html">
     <c:param name="urlType" value="list"></c:param>
 </c:url>
+<c:url var="userList" value="/admin-user-list.html">
+    <c:param name="urlType" value="list"/>
+</c:url>
+<c:url var="addFileListen" value="/admin-exercise-upload">
+    <c:param name="urlType" value="list"/>
+</c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
     <script type="text/javascript">
@@ -38,19 +44,20 @@
         </div>
     </div>
     <ul class="nav nav-list">
+
         <li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-<fmt:message bundle="${lang}" key="label.listenguideline"/>
+<fmt:message key="label.user.management" bundle="${lang}"/>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href="${listListenGuideline}">
+                    <a href="${userList}">
                         <i class="menu-icon fa fa-caret-right"></i>
-<fmt:message bundle="${lang}" key="label.listenguideline.list"/>
+<fmt:message key="label.list.user" bundle="${lang}"></fmt:message>
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -60,33 +67,15 @@
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-
+               <fmt:message bundle="${lang}" key="label.exercise.management"/>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href="">
+                    <a href="${addFileListen}">
                         <i class="menu-icon fa fa-caret-right"></i>
-
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-            </ul>
-        </li>
-        <li class="">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-list"></i>
-                <span class="menu-text"></span>
-               />
-                <b class="arrow fa fa-angle-down"></b>
-            </a>
-            <b class="arrow"></b>
-            <ul class="submenu">
-                <li class="">
-                    <a href="<c:url value=""/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-
+<fmt:message bundle="${lang}" key="label.exercise.listen"></fmt:message>
                     </a>
                     <b class="arrow"></b>
                 </li>

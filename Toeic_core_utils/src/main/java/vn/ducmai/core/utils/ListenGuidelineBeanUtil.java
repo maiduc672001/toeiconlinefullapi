@@ -12,6 +12,7 @@ public class ListenGuidelineBeanUtil {
         dto.setImage(entity.getImage());
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setModifiedDate(entity.getModifiedDate());
+        dto.setExerciseListenDTO(ExerciseListenBeanUtil.entity2Dto(entity.getExerciseListenEntity()));
         return dto;
     }
     public static ListenGuidelineEntity dTOTOEntity(ListenGuidelineDTO dto){
@@ -22,6 +23,7 @@ public class ListenGuidelineBeanUtil {
         entity.setListenGuidelineId(dto.getListenGuidelineId());
         entity.setTitle(dto.getTitle());
         entity.setModifiedDate(dto.getModifiedDate());
+        entity.setExerciseListenEntity(ExerciseListenBeanUtil.dto2Entity(dto.getExerciseListenDTO()));
         return entity;
     }
 }

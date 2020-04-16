@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 import vn.ducmai.core.web.command.AbstractCommand;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestUtil {
@@ -20,5 +19,15 @@ public class RequestUtil {
         command.setSortDirection(sortDirection);
         command.setSortExpression(sortExpression);
         command.setFirstItem((command.getPage()-1)*command.getMaxPageItems());
+    }
+    public static void initManualSearchBean(AbstractCommand command){
+        if(command!=null){
+            Integer page=1;
+            if(command.getPage()!=0){
+                page=command.getPage();
+            }
+            command.setPage(page);
+            command.setFirstItem((command.getPage()-1)*command.getMaxPageItems());
+        }
     }
 }

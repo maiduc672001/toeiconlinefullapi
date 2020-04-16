@@ -15,5 +15,7 @@
         <mapping class="vn.ducmai.core.persistence.entity.UserEntity"></mapping>
         <mapping class="vn.ducmai.core.persistence.entity.CommentEntity"></mapping>
         <mapping class="vn.ducmai.core.persistence.entity.ListenGuidelineEntity"></mapping>
+        <mapping class="vn.ducmai.core.persistence.entity.ExerciseListenEntity"></mapping>
+        <mapping class="vn.ducmai.core.persistence.entity.ExerciseQuestionListenEntity"></mapping>
     </session-factory>
 </hibernate-configuration>

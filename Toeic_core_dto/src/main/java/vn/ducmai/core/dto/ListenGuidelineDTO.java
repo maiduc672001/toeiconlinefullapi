@@ -10,6 +10,15 @@ public class ListenGuidelineDTO implements Serializable {
     private String content;
     private Timestamp createdDate;
     private Timestamp modifiedDate;
+    private ExerciseListenDTO exerciseListenDTO;
+
+    public ExerciseListenDTO getExerciseListenDTO() {
+        return exerciseListenDTO;
+    }
+
+    public void setExerciseListenDTO(ExerciseListenDTO exerciseListenDTO) {
+        this.exerciseListenDTO = exerciseListenDTO;
+    }
 
     public Integer getListenGuidelineId() {
         return listenGuidelineId;

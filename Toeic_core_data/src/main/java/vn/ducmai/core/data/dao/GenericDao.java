@@ -12,4 +12,5 @@ public interface GenericDao<ID extends Serializable,T> {
     T findById(ID id);
     T findEqualUnique(String property,Object value);
     Object[] findByProperties(Map<String,Object> mapProperties,String sortDirection,String sortExpression,Integer first,Integer limit);
+
 }

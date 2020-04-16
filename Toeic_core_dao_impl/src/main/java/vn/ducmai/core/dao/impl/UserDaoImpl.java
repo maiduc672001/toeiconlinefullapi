@@ -8,6 +8,9 @@ import vn.ducmai.core.data.daoimpl.AbstractDao;
 import vn.ducmai.core.persistence.entity.UserEntity;
 import vn.ducmai.core.utils.HibernateUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements UserDao {
 
     @Override
@@ -32,5 +35,25 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
             throw e;
         }
         return new Object[]{check,roleName};
+    }
+
+    @Override
+    public List<UserEntity> findAllByName(List<String> names) {
+        Session session=HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction=session.beginTransaction();
+        List<UserEntity> entities=null;
+        try{
+            StringBuilder sql=new StringBuilder("FROM UserEntity ue WHERE ue.name IN (:names)");
+            Query query=session.createQuery(sql.toString());
+            query.setParameterList("names",names);
+            entities=query.list();
+            transaction.commit();
+        }catch (HibernateException e){
+            transaction.rollback();
+            throw e;
+        }finally {
+            session.close();
+        }
+return entities;
     }
 }

@@ -19,6 +19,17 @@ public class ListenGuidelineEntity {
     private Timestamp createdDate;
 @Column(name = "modifieddate")
     private Timestamp modifiedDate;
+@OneToOne
+@JoinColumn(name = "exerciselistenid")
+private ExerciseListenEntity exerciseListenEntity;
+
+    public ExerciseListenEntity getExerciseListenEntity() {
+        return exerciseListenEntity;
+    }
+
+    public void setExerciseListenEntity(ExerciseListenEntity exerciseListenEntity) {
+        this.exerciseListenEntity = exerciseListenEntity;
+    }
 
     public List<CommentEntity> getCommentEntityList() {
         return commentEntityList;

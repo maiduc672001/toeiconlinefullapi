@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-
+<c:url value="/exercise-listen.html" var="listExeListen">
+    <c:param name="urlType" value="list"/>
+</c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,16 +67,16 @@
 
 <div class="row feature-box">
     <div class="span12 cnt-title">
-        <h1>At vero eos et accusamus et iusto odio dignissimos</h1>
-        <span>Contrary to popular belief, Lorem Ipsum is not simply random text.</span>
+        <h1>Welcome to Nguyễn Đức Toeic</h1>
+        <span>Let's Start</span>
     </div>
     <div class="span4">
         <img src="img/icon3.png">
-        <h2>A</h2>
+        <h2><fmt:message bundle="${lang}" key="label.exercise.listen.user"/></h2>
         <p>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+            Improve your listening
         </p>
-        <a href="#">Read More &rarr;</a>
+        <a href="${listExeListen}">Read More &rarr;</a>
     </div>
 
     <div class="span4">

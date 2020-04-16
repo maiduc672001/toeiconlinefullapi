@@ -1,8 +1,10 @@
 <%@include file="/common/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:url value="/admin-listenguideline-list.html" var="requestUrl"></c:url>
-<c:url value="/admin-listenguideline-edit.html" var="urlEdit">
-   <c:param name="urlType" value="edit"></c:param>
+<c:url var="urlEdit" value="/admin-listenguideline-edit.html">
+    <c:param name="urlType" value="edit"></c:param>
+</c:url>
+<c:url var="formUrl" value="/admin-listenguideline-list.html">
+
 </c:url>
 <head>
     <title><fmt:message key="label.listenguideline.list" bundle="${lang}"/></title>
@@ -31,18 +33,18 @@
                 <div class="col-xs-12">
 
                     <%--  <a href="${listenGuidelineEdit}">Thêm bài nghe</a>--%>
-                    <c:if test="${not empty messageResponse}">
+                    <c:if test="${not empty message_response}">
                         <div class="alert-block alert-${alert}">
                             <button type="button" class="close" data-dismiss="alert">
                                 <i class="ace-icon"></i>
                             </button>
-                                ${messageResponse}
+                                ${message_response}
                         </div>
                     </c:if>
                     <form action="${formUrl}" method="get" id="formUrl">
                         <div class="row">
                             <div class="col-xs-12">
-                                <%--<div class="widget-box table-filter">
+                                <div class="widget-box table-filter">
                                     <div class="widget-header">
                                         <h4 class="widget-title"><fmt:message key="label.search" bundle="${lang}"/></h4>
                                         <div class="widget-toolbar">
@@ -61,7 +63,7 @@
                                                     <div class="col-sm-8">
                                                         <div class="fg-line">
                                                             <input type="text" value="${items.pojo.title}"
-                                                                   class="form-control input-sm" name="pojo.title"/>
+                                                                   class="form-control input-sm" name="pojo.title" id="textSearch"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,22 +79,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>--%>
+                                </div>
                                 <div class="table-btn-controls">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
                                             <a flag="info"
                                                class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
-                                               href="${urlEdit}">
+                                               href="${urlEdit}"
+                                               data-toggle="tooltip"
+                                               title="<fmt:message bundle='${lang}' key='label.listenguideline.add'/>"
+                                            >
                                                     <span>
                                                         <i class="fa fa-plus-circle bigger-110 purple"></i>
                                                     </span>
                                             </a>
                                             <button type="button"
                                                     class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-                                                    id="deleteAll"
+                                                    id="deleteAll" onclick="warningBeforeDelete()"
                                                     data-toggle="tooltip"
-                                                    title="">
+                                                    title="<fmt:message  key='label.delete.all' bundle='${lang}'/>" disabled>
                                                      <span>
                                                         <i class="fa fa-trash-o bigger-110 pink"></i>
                                                     </span>
@@ -117,10 +122,17 @@
                                     </display:column>
                                     <display:column property="title" titleKey="label.listenguideline.list.title" sortable="true" sortName="title"></display:column>
                                     <display:column property="content" titleKey="label.listenguideline.list.content" sortable="true" sortName="content"></display:column>
+                                    <display:column headerClass="col-actions" titleKey="label.action">
+                                        <c:url var="editUrl" value="/admin-listenguideline-edit.html">
+                                            <c:param name="urlType" value="edit"/>
+                                            <c:param name="pojo.listenGuidelineId" value="${tableList.listenGuidelineId}"/>
+                                        </c:url>
+                                        <a class="btn btn-sm btn-primary btn-edit" href="${editUrl}" data-toggle="tooltip" title="<fmt:message key='label.listenguideline.update' bundle='${lang}'/>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    </display:column>
                                 </display:table>
                             </fmt:bundle>
                         </div>
-                        <input type="hidden" name="urlType" id="urlType" value="url_list"/>
+                        <input type="hidden" name="urlType" id="urlType" value="edit"/>
                         <input type="hidden" name="crudaction" id="crudaction"/>
                     </form>
                 </div>
@@ -129,16 +141,36 @@
     </div>
 </div>
 <script>
-    $('#btnSearch').click(function () {
-        $('#formUrl').submit();
+function warningBeforeDelete() {
+showAlertBeforeDelete(function () {
+$('#crudaction').val('delete');
+var data={};
+var ids=$('tbody input[type=checkbox]:checked').map(function () {
+return $(this).val();
+}).get();
+data['ids']=ids;
+deleteNewData(data);
+})
+}
+function deleteNewData(data) {
+    $.ajax({
+        url:'${urlEdit}',
+        type:'DELETE',
+        contentType:'application/json',
+        data:JSON.stringify(data),
+        success:function (result) {
+            window.location.href="${NewUrl}?urlType=list";
+        },
+        error:function (error) {
+            console.log(error);
+        }
     })
+}
+$('#btnSearch').click(function () {
+    $('#urlType').val('list');
+   $('#formUrl').submit();
 
-    function warningBeforeDelete() {
-        showAlertBeforeDelete(function () {
-            $('#crudaction').val('redirect_delete');
-            $('#formUrl').submit();
-        });
-    }
+})
 </script>
 </body>
 </html>

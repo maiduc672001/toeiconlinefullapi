@@ -13,8 +13,8 @@ return sessionUtil;
     public void setSession(HttpServletRequest request,String key,Object value){
         request.getSession().setAttribute(key,value);
     }
-    public void getSession(HttpServletRequest request,String key){
-        request.getSession().getAttribute(key);
+    public Object getSession(HttpServletRequest request,String key){
+        return request.getSession().getAttribute(key);
     }
     public void deleteSession(HttpServletRequest request,String key){
         request.getSession().removeAttribute(key);
